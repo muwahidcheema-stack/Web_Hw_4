@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Homework___4.Models.Car>
+
+@{
+    ViewData["Title"] = "Booked Cars";
+}
+
+<div class="container my-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">Booked Cars</h2>
+        <a asp-controller="Cars" asp-action="Index" class="btn btn-secondary">Back to Cars</a>
+    </div>
+
+    @if (Model == null || !Model.Any())
+    {
+        <div class="alert alert-info text-center" role="alert">
+            No cars have been booked yet.
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-striped table-hover align-middle shadow-sm">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Car Name</th>
+                        <th scope="col">Price Per Day</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var car in Model)
+                    {
+                        <tr>
+                            <th scope="row">@car.Id</th>
+                            <td class="fw-semibold">@car.Name</td>
+                            <td>PKR @car.PricePerDay.ToString("N0")</td>
+                            <td>
+                                <span class="badge bg-warning text-dark">Booked</span>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
